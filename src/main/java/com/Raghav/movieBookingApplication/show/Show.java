@@ -1,17 +1,20 @@
 package com.Raghav.movieBookingApplication.show;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.Raghav.movieBookingApplication.booking.Booking;
 import com.Raghav.movieBookingApplication.movie.Movie;
 import com.Raghav.movieBookingApplication.theater.Theater;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,14 +28,15 @@ public class Show {
 	
 	private Double price;
 	
-	@ManyToOne
-	@JoinColumn(name="movie_id")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="movie_id",nullable=false)
 	private Movie movie;
 	
-	@ManyToOne
-	@JoinColumn(name="theater_id")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="theater_id",nullable=false)
 	private Theater theater;
 
-	
-	
+	@OneToMany(mappedBy="show",fetch=FetchType.LAZY)
+	private List<Booking>booking;
+ 	
 }

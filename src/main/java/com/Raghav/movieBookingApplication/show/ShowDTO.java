@@ -1,0 +1,16 @@
+package com.Raghav.movieBookingApplication.show;
+
+import java.time.LocalDateTime;
+
+public class ShowDTO {
+
+	
+
+	private LocalDateTime showTime;
+	
+	private Double price;
+	
+	private Long movieId;
+	
+	private Long theaterId;
+}
