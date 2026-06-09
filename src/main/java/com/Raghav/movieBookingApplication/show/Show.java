@@ -38,5 +38,45 @@ public class Show {
 
 	@OneToMany(mappedBy="show",fetch=FetchType.LAZY)
 	private List<Booking>booking;
+
+	public LocalDateTime getShowTime() {
+		return showTime;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public Theater getTheater() {
+		return theater;
+	}
+
+	public List<Booking> getBooking() {
+		return booking;
+	}
+
+	public void setShowTime(LocalDateTime showTime) {
+		this.showTime = showTime;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
+	public void setTheater(Theater theater) {
+		this.theater = theater;
+	}
+
+	public void setBooking(List<Booking> booking) {
+		this.booking = booking;
+	}
  	
 }
