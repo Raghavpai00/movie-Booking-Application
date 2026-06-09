@@ -1,4 +1,4 @@
-package com.Raghav.movieBookingApplication.movie;
+ package com.Raghav.movieBookingApplication.movie;
 
 import java.util.List;
 import java.util.Optional;
