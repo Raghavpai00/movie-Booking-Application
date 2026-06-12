@@ -81,7 +81,7 @@ public class ShowService {
 			throw new RuntimeException("no show available for the id"+id);
 		}
 		
-		List<Booking>bookings=showRepository.findById(id).get().getBooking();
+		List<Booking>bookings=showRepository.findById(id).get().getBookings();
 		if(!bookings.isEmpty()) {
 			throw new RuntimeException("cant delete show with existing bookings");
 		}

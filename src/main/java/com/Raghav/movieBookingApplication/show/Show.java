@@ -55,7 +55,7 @@ public class Show {
 		return theater;
 	}
 
-	public List<Booking> getBooking() {
+	public List<Booking> getBookings() {
 		return booking;
 	}
 
@@ -75,8 +75,16 @@ public class Show {
 		this.theater = theater;
 	}
 
-	public void setBooking(List<Booking> booking) {
+	public void setBookings(List<Booking> booking) {
 		this.booking = booking;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
  	
 }
