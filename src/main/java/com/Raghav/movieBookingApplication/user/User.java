@@ -1,13 +1,19 @@
 package com.Raghav.movieBookingApplication.user;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.Raghav.movieBookingApplication.booking.Booking;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -16,40 +22,53 @@ import lombok.Data;
 @Entity
 @Data
 @Table (name="users")
-public class User {
+public class User implements UserDetails {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(nullable=false,unique=true)
-	private String username;
+ 	private String username;
 	
-	@Column(nullable=false)
-	private String password;
+ 	private String password;
 	
-	@Column(nullable=false)
-	private String role;
-	
-	@Column(nullable=false,unique=true)
-	private String email;
+ 	private String email;
 
-	@OneToMany(mappedBy = "user")
-	private List<Booking> bookings;
-	
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+ 	@ElementCollection(fetch=FetchType.EAGER)
+ 	private Set<String>roles;
+ 	
+ 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+ 	private List<Booking> bookings;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return roles.stream()
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	}
 
-	
-	
-	public User(String username, String password, String role, String email) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.role = role;
-		this.email = email;
+	@Override
+	public @Nullable String getPassword() {
+		// TODO Auto-generated method stub
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public Set<String> getRoles() {
+		return roles;
+	}
+
+	public List<Booking> getBookings() {
+		return bookings;
 	}
 
 	public long getId() {
@@ -60,43 +79,24 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Override
-	public String toString() {
-	    return "User [id=" + id +
-	           ", username=" + username +
-	           ", email=" + email +
-	           ", role=" + role +
-	           "]";
+
+	public void setRoles(Set<String> roles) {
+		this.roles = roles;
 	}
+
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+
 }

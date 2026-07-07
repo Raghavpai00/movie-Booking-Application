@@ -39,7 +39,7 @@ public class BookingController {
 		return ResponseEntity.ok(bookingService.getShowBookings(id));
 	}
 	
-	@PutMapping("{id/confirm}")
+	@PutMapping("{id}/confirm")
 	public ResponseEntity<Booking> confirmedBooking(@PathVariable Long id){
 		return ResponseEntity.ok(bookingService.confirmedBookings(id));
 	}
