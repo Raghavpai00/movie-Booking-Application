@@ -3,6 +3,7 @@ package com.Raghav.movieBookingApplication.theater;
 import java.util.List;
 
 import com.Raghav.movieBookingApplication.show.Show;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,6 +27,7 @@ public class Theater {
 	private String theaterScreenType;
 	
 	@OneToMany(mappedBy="theater",fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List <Show> shows;
 
 	

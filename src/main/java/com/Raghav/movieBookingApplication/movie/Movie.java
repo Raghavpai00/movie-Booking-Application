@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.Raghav.movieBookingApplication.show.Show;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,9 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Data;
 
 @Entity
 @Table(name="movies")
@@ -34,6 +32,7 @@ public class Movie {
 	private LocalDate releaseDate;
 	
 	@OneToMany(mappedBy = "movie", fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Show> shows;
 	
 	
