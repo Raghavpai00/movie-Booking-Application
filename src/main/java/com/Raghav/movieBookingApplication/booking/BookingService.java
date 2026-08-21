@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.Raghav.movieBookingApplication.common.BookingStatus;
 import com.Raghav.movieBookingApplication.show.Show;
@@ -26,8 +27,10 @@ public class BookingService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
+	@Transactional
 	public Booking createBooking(BookingDTO bookingDTO) {
-		Show show=showRepository.findById(bookingDTO.getShowId())
+		Show show=showRepository.findByIdForUpdate(bookingDTO.getShowId())
 				.orElseThrow(() -> new RuntimeException("Show not found"));
 		
 		if(!isSeatAvailable(show.getId(),bookingDTO.getNumberOfSeats())) {
