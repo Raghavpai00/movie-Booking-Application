@@ -6,6 +6,7 @@ import java.util.List;
 import com.Raghav.movieBookingApplication.booking.Booking;
 import com.Raghav.movieBookingApplication.movie.Movie;
 import com.Raghav.movieBookingApplication.theater.Theater;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,6 +38,7 @@ public class Show {
 	private Theater theater;
 
 	@OneToMany(mappedBy="show",fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Booking>booking;
 
 	public LocalDateTime getShowTime() {
@@ -54,7 +56,7 @@ public class Show {
 	public Theater getTheater() {
 		return theater;
 	}
-
+	@JsonIgnore
 	public List<Booking> getBookings() {
 		return booking;
 	}

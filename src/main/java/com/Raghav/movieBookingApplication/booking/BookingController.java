@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Raghav.movieBookingApplication.common.BookingStatus;
 
 @RestController
+@RequestMapping("/api/booking")
 public class BookingController {
 
 	@Autowired

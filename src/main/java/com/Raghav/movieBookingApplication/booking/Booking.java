@@ -6,12 +6,11 @@ import java.util.List;
 import com.Raghav.movieBookingApplication.common.BookingStatus;
 import com.Raghav.movieBookingApplication.show.Show;
 import com.Raghav.movieBookingApplication.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,6 +45,7 @@ public class Booking {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="show_id",nullable=false)
+	@JsonIgnore
 	private Show show;
 
 	public Integer getNumberOfSeats() {
@@ -71,7 +71,7 @@ public class Booking {
 	public User getUser() {
 		return user;
 	}
-
+	@JsonIgnore
 	public Show getShow() {
 		return show;
 	}

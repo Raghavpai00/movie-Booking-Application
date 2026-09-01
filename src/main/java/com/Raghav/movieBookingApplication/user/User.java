@@ -4,12 +4,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.Raghav.movieBookingApplication.booking.Booking;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -31,7 +33,8 @@ public class User implements UserDetails {
 	private long id;
 	
  	private String username;
-	
+ 	
+ 	@JsonIgnore
  	private String password;
 	
  	private String email;
@@ -40,6 +43,7 @@ public class User implements UserDetails {
  	private Set<String>roles;
  	
  	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+ 	@JsonIgnore
  	private List<Booking> bookings;
 
 	@Override
