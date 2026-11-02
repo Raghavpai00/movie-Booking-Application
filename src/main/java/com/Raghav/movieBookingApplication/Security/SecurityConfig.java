@@ -76,5 +76,3 @@ public AuthenticationManager authenticationManager(AuthenticationConfiguration c
 
 
 
-
-	
